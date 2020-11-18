@@ -1,0 +1,41 @@
+<div class="card shadow">
+  <div class="card-header">
+
+
+    <h5 class="card-title">
+      <%= if @action == :new, do: "Create", else: "Edit" %> screening
+    </h5>
+    <%= live_patch raw("&times;"), to: @return_to, class: "phx-modal-close" %>
+  </div>
+  <div class="card-body">
+    <%= f = form_for @changeset, "#",
+      id: "screening-form",
+      class: "block",
+      phx_target: @myself,
+      phx_change: "validate",
+      phx_submit: "save" %>
+
+      <div class="mb-6">
+        <%= label f, :recipient_email, class: "tag-label block text-gray-700 text-sm font-bold mb-2" %>
+        <%= text_input f, :recipient_email, class: "tag-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <%= error_tag f, :recipient_email %>
+      </div>
+
+      <div class="mb-6">
+        <%= label f, :screenings_amount, class: "tag-label block text-gray-700 text-sm font-bold mb-2"%>
+        <%= number_input f, :screenings_amount, class: "tag-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <%= error_tag f, :screenings_amount %>
+      </div>
+
+      <div class="mb-6">
+        <%= label f, :screenings_expiry, class: "tag-label block text-gray-700 text-sm font-bold mb-2"%>
+        <%= permit_datetime_select f, :screenings_expiry %>
+        <%= error_tag f, :screenings_expiry %>
+      </div>
+
+      <div class="mt-8 mb-2">
+        <%= submit "Save", phx_disable_with: "Saving...", class: "btn btn-primary btn-sm" %>
+      </div>
+    </form>
+  </div>
+</div>

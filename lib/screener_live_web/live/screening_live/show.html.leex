@@ -1,0 +1,52 @@
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, ScreenerLiveWeb.ScreeningLive.FormComponent,
+    id: @screening.id,
+    title: @page_title,
+    action: @live_action,
+    screening: @screening,
+    return_to: Routes.screening_show_path(@socket, :show, @screening) %>
+<% end %>
+
+<div class="flex flex-wrap">
+  <div class="w-full md:w-2/3">
+    <div class="card shadow">
+      <div class="card-header">
+        <h5 class="card-title">
+          Show Screening
+        </h5>
+      </div>
+      <div class="card-body prose">
+
+        <div>
+          <strong>Recipient email:</strong>
+          <%= @screening.recipient_email %>
+        </div>
+
+        <div>
+          <strong>Screenings amount:</strong>
+          <%= @screening.screenings_amount %>
+        </div>
+
+        <div>
+          <strong>Screenings used:</strong>
+          <%= @screening.screenings_used %>
+        </div>
+
+        <div>
+          <strong>Screenings expiry:</strong>
+          <%= @screening.screenings_expiry %>
+        </div>
+
+        <div>
+          <strong>Uuid:</strong>
+          <%= @screening.uuid %>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <%= live_patch "Edit", to: Routes.screening_show_path(@socket, :edit, @screening), class: "btn btn-link btn-sm" %>
+        <%= live_redirect "Back", to: Routes.screening_index_path(@socket, :index), class: "btn btn-link btn-sm" %>
+      </div>
+    </div>
+  </div>
+</div>
