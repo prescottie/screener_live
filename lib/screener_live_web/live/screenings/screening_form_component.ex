@@ -1,7 +1,8 @@
-defmodule ScreenerLiveWeb.ScreeningLive.FormComponent do
+defmodule ScreenerLiveWeb.Screenings.ScreeningFormComponent do
   use ScreenerLiveWeb, :live_component
 
   alias ScreenerLive.Screenings
+  alias ScreenerLive.Screenings.ScreeningNotifier
 
   @impl true
   def update(%{screening: screening} = assigns, socket) do
@@ -27,7 +28,7 @@ defmodule ScreenerLiveWeb.ScreeningLive.FormComponent do
     save_screening(socket, socket.assigns.action, screening_params)
   end
 
-  defp save_screening(socket, :edit, screening_params) do
+  defp save_screening(socket, :edit_screening, screening_params) do
     case Screenings.update_screening(socket.assigns.screening, screening_params) do
       {:ok, _screening} ->
         {:noreply,
@@ -40,14 +41,12 @@ defmodule ScreenerLiveWeb.ScreeningLive.FormComponent do
     end
   end
 
-  defp save_screening(socket, :new, screening_params) do
-    video =
-      Screenings.get_video_by_uuid_and_user_id(socket.assigns.video_uuid, socket.assigns.user_id)
-
-    screening_params = Map.put(screening_params, "video_id", video.id)
-
+  defp save_screening(socket, :new_screening, screening_params) do
     case Screenings.create_screening(screening_params) do
-      {:ok, _screening} ->
+      {:ok, screening} ->
+        video = Enum.find(socket.assigns.videos, fn x -> x.id == screening.video_id end)
+        ScreeningNotifier.deliver_new_screening(screening, video)
+
         {:noreply,
          socket
          |> put_flash(:info, "Screening created successfully")

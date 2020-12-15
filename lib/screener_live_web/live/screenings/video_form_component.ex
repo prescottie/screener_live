@@ -1,16 +1,16 @@
-defmodule ScreenerLiveWeb.VideoLive.FormComponent do
+defmodule ScreenerLiveWeb.Screenings.VideoFormComponent do
   use ScreenerLiveWeb, :live_component
 
   alias ScreenerLive.Screenings
 
   @impl true
   def update(%{video: video} = assigns, socket) do
-    changeset = Screenings.change_video(video)
+    video_changeset = Screenings.change_video(video)
 
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:changeset, changeset)}
+     |> assign(:changeset, video_changeset)}
   end
 
   @impl true
@@ -27,7 +27,7 @@ defmodule ScreenerLiveWeb.VideoLive.FormComponent do
     save_video(socket, socket.assigns.action, video_params)
   end
 
-  defp save_video(socket, :edit, video_params) do
+  defp save_video(socket, :edit_video, video_params) do
     case Screenings.update_video(socket.assigns.video, video_params) do
       {:ok, _video} ->
         {:noreply,
@@ -40,8 +40,8 @@ defmodule ScreenerLiveWeb.VideoLive.FormComponent do
     end
   end
 
-  defp save_video(socket, :new, video_params) do
-    video_params = Map.put(video_params, "user_id", socket.assigns.user_id)
+  defp save_video(socket, :new_video, video_params) do
+    video_params = Map.put(video_params, "user_id", socket.assigns.user.id)
 
     case Screenings.create_video(video_params) do
       {:ok, _video} ->

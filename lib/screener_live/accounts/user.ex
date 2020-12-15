@@ -15,7 +15,7 @@ defmodule ScreenerLive.Accounts.User do
     timestamps()
 
     has_many :videos, Video
-    has_many :video_screenings, through: [:videos, :screenings]
+    has_many :screenings, through: [:videos, :screenings]
   end
 
   @doc """

@@ -43,7 +43,7 @@
                 <td class="text-right">
                   <span> </span>
                   <span><%= live_patch "Edit", to: Routes.video_index_path(@socket, :edit, video) %></span>
-                  <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: video.id, data: [confirm: "Are you sure?"] %></span>
+                  <span><%= link "Delete", to: "#", phx_click: "delete_video", phx_value_id: video.id, data: [confirm: "Are you sure?"] %></span>
                 </td>
               </tr>
   <% end %>

@@ -4,6 +4,7 @@ defmodule ScreenerLive.Screenings do
   """
 
   import Ecto.Query, warn: false
+  alias Ecto.Multi
   alias ScreenerLive.Repo
 
   alias ScreenerLive.Screenings.Video
@@ -22,14 +23,12 @@ defmodule ScreenerLive.Screenings do
     Repo.all(Video)
   end
 
-  def list_videos_by_user_id(user_id) do
-    q =
-      from v in Video,
-        where: v.user_id == ^user_id,
-        left_join: screenings in assoc(v, :screenings),
-        preload: :screenings
+  def list_videos_by_user(user) do
+    Repo.all(Ecto.assoc(user, :videos))
+  end
 
-    Repo.all(q)
+  def list_screenings_by_user(user) do
+    Repo.all(Ecto.assoc(user, :screenings))
   end
 
   @doc """
@@ -47,6 +46,10 @@ defmodule ScreenerLive.Screenings do
 
   """
   def get_video!(id), do: Repo.get!(Video, id)
+
+  @doc false
+  def get_video_by_uuid_and_user_id(uuid, user_id),
+    do: Repo.get_by(Video, uuid: uuid, user_id: user_id)
 
   @doc """
   Creates a video.
@@ -126,6 +129,10 @@ defmodule ScreenerLive.Screenings do
     Repo.all(Screening)
   end
 
+  def list_screenings_by_video_id(video_id) do
+    Repo.all(from s in Screening, where: s.video_id == ^video_id)
+  end
+
   @doc """
   Gets a single screening.
 
@@ -142,6 +149,10 @@ defmodule ScreenerLive.Screenings do
   """
   def get_screening!(id), do: Repo.get!(Screening, id)
 
+  def get_screening_with_video!(id) do
+    Repo.get!(Screening, id) |> Repo.preload(:video)
+  end
+
   @doc """
   Creates a screening.
 
@@ -154,6 +165,7 @@ defmodule ScreenerLive.Screenings do
       {:error, %Ecto.Changeset{}}
 
   """
+
   def create_screening(attrs \\ %{}) do
     %Screening{}
     |> Screening.changeset(attrs)

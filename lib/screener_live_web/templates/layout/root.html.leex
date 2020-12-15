@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "ScreenerLive", suffix: " · Phoenix Framework" %>
-    <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <link phx-track-static rel="stylesheet" href='<%= Routes.static_path(@conn, "/css/app.css") %>'/>
+    <script defer phx-track-static type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
   </head>
   <body class="flex flex-col h-full bg-gray-100">
     <header class="z-30 fixed top-0 right-0 left-0 bg-white shadow px-2 sm:px-4 py-4">
@@ -15,6 +15,7 @@
         <a href="/" title="ScreenerLive Home Page" class="flex items-center text-xl text-gray-900">
           ScreenerLive
         </a>
+        <div><%= @current_user.email %>, user_id - <%= @current_user.id %> </div>
         <div class="flex items-center space-x-1">
           <div class="hidden md:inline-flex space-x-1">
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>

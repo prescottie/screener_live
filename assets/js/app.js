@@ -47,5 +47,4 @@ liveSocket.connect()
 window.liveSocket = liveSocket
 
 
-import "./stimulus"
-import "alpinejs"
+import 'alpinejs'

@@ -11,7 +11,7 @@ defmodule ScreenerLiveWeb.ModalComponent do
       phx-page-loading>
 
       <div class="phx-modal-content">
-      <%= live_component @socket, @component, @opts %>
+        <%= live_component @socket, @component, @opts %>
       </div>
     </div>
     """

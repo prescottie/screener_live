@@ -3,49 +3,33 @@ defmodule ScreenerLiveWeb.Helpers.Forms do
   import Phoenix.HTML, only: [sigil_E: 2]
   require EEx
 
-  def permit_datetime_select(form, field, opts \\ []) do
+  def date_only_datetime_select(form, field, opts \\ []) do
     builder = fn b ->
       today = Timex.now()
 
-      year = [today.year]
-      year = if today.month == 1 and today.day == 1, do: [today.year - 1, today.year], else: year
-
-      year =
-        if today.month == 12 and today.day > Timex.shift(today, days: +4).day,
-          do: [today.year, today.year + 1],
-          else: year
-
-      month = [today.month]
-
-      month =
-        if today.day == 1, do: [Timex.shift(today, months: -1).month, today.month], else: month
-
-      month =
-        if today.day > Timex.shift(today, days: 4).day,
-          do: [today.month, Timex.shift(today, months: 1).month],
-          else: month
-
-      day = [
-        today.day,
-        Timex.shift(today, days: +1).day,
-        Timex.shift(today, days: +2).day,
-        Timex.shift(today, days: +3).day,
-        Timex.shift(today, days: +4).day,
-        Timex.shift(today, days: -1).day
-      ]
+      year = Enum.map(0..5, fn i -> today.year + i end)
 
       [
-        ~E"<div>Year: ",
-        b.(:year, options: year, value: today.year),
-        ~E" </div><div> Month: ",
-        b.(:month, options: month, value: today.month),
-        ~E" </div><div> Day: ",
-        b.(:day, options: [options: day, value: today.day]),
-        ~E" </div><div> Hour: ",
-        b.(:hour, options: Enum.to_list(today.hour..23) ++ Enum.to_list(1..today.hour)),
-        ~E" </div><div> Minute: ",
-        b.(:minute, options: [0, 15, 30, 45]),
-        ~E"</div>"
+        ~E"<div>",
+        b.(:month,
+          options: 1..12,
+          value: today.month,
+          class: "form-select inline-block w-auto mr-1"
+        ),
+        b.(:day,
+          options: 1..31,
+          value: today.day,
+          class: "form-select inline-block w-auto mr-1"
+        ),
+        b.(:year,
+          options: year,
+          value: today.year,
+          class: "form-select inline-block w-auto mr-1"
+        ),
+        ~E" <span class='text-gray-700 text-xs italic'>MM/DD/YYYY</span></div>",
+        b.(:hour, value: 23, class: "hidden"),
+        b.(:minute, value: 59, class: "hidden"),
+        b.(:second, value: 59, class: "hidden")
       ]
     end
 

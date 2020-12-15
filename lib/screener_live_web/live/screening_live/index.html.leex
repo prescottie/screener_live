@@ -8,6 +8,7 @@
         action: @live_action,
         screening: @screening,
         video_uuid: @video_uuid,
+        user_id: @user_id,
         return_to: Routes.screening_index_path(@socket, :index, @video_uuid) %>
     </div>
   <% end %>
@@ -29,7 +30,6 @@
               <th>Screenings amount</th>
               <th>Screenings used</th>
               <th>Screenings expiry</th>
-              <th>Uuid</th>
 
               <th></th>
             </tr>
@@ -40,8 +40,7 @@
               <td><%= screening.recipient_email %></td>
               <td><%= screening.screenings_amount %></td>
               <td><%= screening.screenings_used %></td>
-              <td><%= screening.screenings_expiry %></td>
-              <td><%= screening.uuid %></td>
+              <td><%= screening.screenings_expiry.month %>/<%= screening.screenings_expiry.day %>/<%= screening.screenings_expiry.year %></td>
 
               <td class="text-right">
                 <span><%= live_redirect "Show", to: Routes.screening_show_path(@socket, :show, @video_uuid, screening) %></span>

@@ -1,9 +1,7 @@
 <div class="card shadow">
   <div class="card-header">
-
-
     <h5 class="card-title">
-      <%= if @action == :new, do: "Create", else: "Edit" %> video
+      <%= if @action == :new_video, do: "Create", else: "Edit" %> video
     </h5>
     <%= live_patch raw("&times;"), to: @return_to, class: "phx-modal-close" %>
   </div>
@@ -16,14 +14,14 @@
       phx_submit: "save" %>
 
       <div class="mb-6">
-        <%= label f, :title, class: "tag-label block text-gray-700 text-sm font-bold mb-2" %>
-        <%= text_input f, :title, class: "tag-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <%= label f, :title, class: "tag-label block text-gray-700 text-sm font-bold" %>
+        <%= text_input f, :title, class: "tag-input appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-400" %>
         <%= error_tag f, :title %>
       </div>
 
       <div class="mb-6">
-        <%= label f, :vimeo_url, class: "tag-label block text-gray-700 text-sm font-bold mb-2" %>
-        <%= text_input f, :external_identifier, class: "tag-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <%= label f, :vimeo_url, class: "tag-label block text-gray-700 text-sm font-bold" %>
+        <%= text_input f, :external_identifier, class: "tag-input appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-400" %>
         <%= error_tag f, :external_identifier %>
       </div>
 

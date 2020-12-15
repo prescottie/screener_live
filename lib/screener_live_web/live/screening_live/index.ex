@@ -3,10 +3,18 @@ defmodule ScreenerLiveWeb.ScreeningLive.Index do
 
   alias ScreenerLive.Screenings
   alias ScreenerLive.Screenings.Screening
+  alias ScreenerLive.Accounts
 
   @impl true
-  def mount(%{"video_uuid" => video_uuid}, _session, socket) do
-    {:ok, assign(socket, screenings: list_screenings(), video_uuid: video_uuid)}
+  def mount(%{"video_uuid" => video_uuid}, session, socket) do
+    user_id = Accounts.get_user_by_session_token(session["user_token"]).id
+
+    {:ok,
+     assign(socket,
+       screenings: list_screenings(video_uuid, user_id),
+       video_uuid: video_uuid,
+       user_id: user_id
+     )}
   end
 
   @impl true
@@ -37,10 +45,13 @@ defmodule ScreenerLiveWeb.ScreeningLive.Index do
     screening = Screenings.get_screening!(id)
     {:ok, _} = Screenings.delete_screening(screening)
 
-    {:noreply, assign(socket, :screenings, list_screenings())}
+    {:noreply, assign(socket, :screenings, list_screenings(video_uuid, socket.assigns.user_id))}
   end
 
-  defp list_screenings do
-    Screenings.list_screenings()
+  defp list_screenings(video_uuid, user_id) do
+    case Screenings.get_video_by_uuid_and_user_id(video_uuid, user_id) do
+      nil -> []
+      video -> Screenings.list_screenings_by_video_id(video.id)
+    end
   end
 end

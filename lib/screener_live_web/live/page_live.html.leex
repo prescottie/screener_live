@@ -1,10 +1,22 @@
-<section class="container mx-auto py-24 px-4">
-  <div class="w-full md:w-11/12 xl:w-8/12 mx-auto text-left md:text-center">
-    <h1 class="text-4xl md:text-5xl text-gray-900 leading-tight mb-3 font-bold md:font-extrabold">
-      Thank you for using Boilerplate Generator
-    </h1>
-    <p class="text-lg md:text-xl text-gray-600 mb-6">
-      You are now ready to start or continue your journey to greatness.
-    </p>
+<section class="grid grid-cols-5 gap-4">
+  <div class="col-span-5 lg:col-span-2">
+    <%= live_component @socket, ScreenerLiveWeb.Screenings.VideosComponent,
+          user: @user,
+          action: @live_action,
+          videos: @videos,
+          video: @video,
+          page_title: @page_title,
+          return_to: Routes.page_path(@socket, :index) %>
+  </div>
+  <div class="col-span-5 lg:col-span-3">
+    <%= live_component @socket, ScreenerLiveWeb.Screenings.ScreeningsComponent,
+            user: @user,
+            action: @live_action,
+            screenings: @screenings,
+            screening: @screening,
+            videos: @videos,
+            video: @video,
+            page_title: @page_title,
+            return_to: Routes.page_path(@socket, :index) %>
   </div>
 </section>

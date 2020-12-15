@@ -25,26 +25,31 @@ defmodule ScreenerLiveWeb.Router do
 
   scope "/", ScreenerLiveWeb do
     pipe_through :browser
-
-    live "/", PageLive, :index
   end
 
   scope "/", ScreenerLiveWeb do
     pipe_through [:browser, :auth_required]
 
-    live "/videos", VideoLive.Index, :index
-    live "/videos/new", VideoLive.Index, :new
-    live "/videos/:id/edit", VideoLive.Index, :edit
+    live "/", PageLive, :index
 
-    live "/videos/:id", VideoLive.Show, :show
-    live "/videos/:id/show/edit", VideoLive.Show, :edit
+    live "/videos/new", PageLive, :new_video
+    live "/videos/:id/edit", PageLive, :edit_video
+    live "/screenings/new", PageLive, :new_screening
+    live "/screenings/:id/edit", PageLive, :edit_screening
 
-    live "/videos/:video_uuid/screenings", ScreeningLive.Index, :index
-    live "/videos/:video_uuid/screenings/new", ScreeningLive.Index, :new
-    live "/videos/:video_uuid/screenings/:id/edit", ScreeningLive.Index, :edit
+    # live "/videos", VideoLive.Index, :index
+    # live "/videos/new", VideoLive.Index, :new
+    # live "/videos/:id/edit", VideoLive.Index, :edit
 
-    live "/videos/:video_uuid/screenings/:id", ScreeningLive.Show, :show
-    live "/videos/:video_uuid/screenings/:id/show/edit", ScreeningLive.Show, :edit
+    # live "/videos/:id", VideoLive.Show, :show
+    # live "/videos/:id/show/edit", VideoLive.Show, :edit
+
+    # live "/videos/:video_uuid/screenings", ScreeningLive.Index, :index
+    # live "/videos/:video_uuid/screenings/new", ScreeningLive.Index, :new
+    # live "/videos/:video_uuid/screenings/:id/edit", ScreeningLive.Index, :edit
+
+    # live "/videos/:video_uuid/screenings/:id", ScreeningLive.Show, :show
+    # live "/videos/:video_uuid/screenings/:id/show/edit", ScreeningLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
