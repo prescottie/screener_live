@@ -9,7 +9,6 @@ defmodule ScreenerLiveWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {ScreenerLiveWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
@@ -19,16 +18,25 @@ defmodule ScreenerLiveWeb.Router do
     plug :require_authenticated_user
   end
 
+  pipeline :consumer_root_layout do
+    plug :put_root_layout, {ScreenerLiveWeb.LayoutView, :consumer_root}
+  end
+
+  pipeline :user_root_layout do
+    plug :put_root_layout, {ScreenerLiveWeb.LayoutView, :root}
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", ScreenerLiveWeb do
-    pipe_through :browser
+    pipe_through [:browser, :consumer_root_layout]
+    live "/screeners/:uuid", ScreeningLive.Show, :show
   end
 
   scope "/", ScreenerLiveWeb do
-    pipe_through [:browser, :auth_required]
+    pipe_through [:browser, :user_root_layout, :auth_required]
 
     live "/", PageLive, :index
 
@@ -48,7 +56,6 @@ defmodule ScreenerLiveWeb.Router do
     # live "/videos/:video_uuid/screenings/new", ScreeningLive.Index, :new
     # live "/videos/:video_uuid/screenings/:id/edit", ScreeningLive.Index, :edit
 
-    # live "/videos/:video_uuid/screenings/:id", ScreeningLive.Show, :show
     # live "/videos/:video_uuid/screenings/:id/show/edit", ScreeningLive.Show, :edit
   end
 

@@ -16,10 +16,39 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
-import {InitToast} from "./init_toast.js"
+import Player from '@vimeo/player';
 
 let Hooks = {}
-Hooks.InitToast = InitToast
+Hooks.InitToast = {
+  mounted() {
+    // const toastEl = document.querySelector('.toast')
+    if (this.el.innerText !== '') {
+      this.el.classList.add("mr-4")
+
+      setTimeout(() => {
+        this.el.classList.remove("mr-4")
+        this.el.classList.toggle("-mr-64")
+      }, 3000);
+    }
+  }
+}
+Hooks.InitVideo = {
+  mounted() {
+      this.firstPlay = false
+      console.log("MOUNTING")
+      const player = new Player('video-player', {
+        id: this.el.dataset.url,
+        responsive: true
+      });
+      
+      player.on('play', function() {
+        if (!this.firstPlay) {
+          this.firstPlay = true
+          this.pushEvent("playback_started", {})
+        }
+      }.bind(this));
+  }
+}
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {

@@ -7,6 +7,7 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
+    "@vimeo/player": "^2.14.1",
     "alpinejs": "^2.7.3",
     "kutty": "^0.3.4",
     "nprogress": "^0.2.0",

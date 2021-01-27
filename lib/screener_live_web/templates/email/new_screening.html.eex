@@ -252,7 +252,7 @@
                 
       <div
          style="font-family:sans-serif;font-size:18px;line-height:1;text-align:left;color:#ffffff;"
-      ><%= @screening.screenings_amount%> new screenings have been provisioned to you for "<%= @video.title%>" 🍿. To view the screener, please click the button below and enter the email address to which this message was sent.</div>
+      ><%= @screening.screenings_amount%> new screenings have been provisioned to you for "<%= @video.title%>" 🍿. To view the screener, please click the button below.</div>
     
               </td>
             </tr>

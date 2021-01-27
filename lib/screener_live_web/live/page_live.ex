@@ -23,12 +23,14 @@ defmodule ScreenerLiveWeb.PageLive do
     socket
     |> assign(:page_title, "Edit Video")
     |> assign(:video, Screenings.get_video!(id))
+    |> assign(:screening, nil)
   end
 
   defp apply_action(socket, :new_video, _params) do
     socket
     |> assign(:page_title, "New Video")
     |> assign(:video, %Video{})
+    |> assign(:screening, nil)
   end
 
   defp apply_action(socket, :edit_screening, %{"id" => id}) do

@@ -34,4 +34,50 @@ defmodule ScreenerLive.Screenings.Screening do
     ])
     |> unique_constraint(:video_id_recipient_email)
   end
+
+  def consumption_changeset(screening) do
+    new_used_amount = screening.screenings_used + 1
+
+    screening
+    |> cast(%{"screenings_used" => new_used_amount}, [:screenings_used])
+    |> validate_screenings_amount()
+  end
+
+  defp validate_screenings_amount(
+         %Ecto.Changeset{valid?: true, changes: %{screenings_used: screenings_used}} = changeset
+       ) do
+    if screenings_used <= changeset.data.screenings_amount do
+      changeset
+    else
+      add_error(
+        changeset,
+        :screenings_used,
+        "This maximum number of screenings has already been consumed."
+      )
+    end
+  end
+
+  def expired?(screening) do
+    screening.screenings_expiry < NaiveDateTime.utc_now()
+  end
+
+  def limit_reached?(screening) do
+    screening.screenings_used >= screening.screenings_amount
+  end
+
+  def error_type(screening) do
+    cond do
+      screening == nil ->
+        "not_found"
+
+      expired?(screening) ->
+        "expired"
+
+      limit_reached?(screening) ->
+        "limit_reached"
+
+      true ->
+        nil
+    end
+  end
 end

@@ -15,18 +15,18 @@
   <% end %>
   <div class="w-full">
     <div class="flex justify-between mb-4">
-      <h5 class="text-xl font-bold">
+      <h5 class="text-xl font-bold text-ghost">
         Screenings
       </h5>
-      <%= live_patch to: Routes.page_path(@socket, :new_screening), class: "btn btn-outline-primary btn-icon btn-sm " do %>
+      <%= live_patch to: Routes.page_path(@socket, :new_screening), class: "btn btn-icon btn-sm bg-emerald text-ghost hover:bg-emerald-dark" do %>
         <svg fill="currentColor" width="24" height="24" viewBox="0 0 20 20" stroke-width="2"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
       <% end %>
     </div>
-    <div class="card shadow">
+    <div class="card shadow bg-charcoal-light border-0">
       <div class="card-body prose max-w-full">
-        <table class="table">
+        <table class="table-auto text-ghost">
           <thead>
-            <tr>
+            <tr class="text-ghost">
               <th>Recipient email</th>
               <th>Video</th>
               <th>Used</th>
@@ -45,9 +45,13 @@
               <td><%= screening.screenings_amount %></td>
               <td><%= screening.screenings_expiry.month %>/<%= screening.screenings_expiry.day %>/<%= screening.screenings_expiry.year %></td>
 
-              <td class="text-right">
-                <span><%= live_patch "Edit", to: Routes.page_path(@socket, :edit_screening, screening) %></span>
-                <span><%= link "Delete", to: "#", phx_click: "delete_screening", phx_value_id: screening.id, data: [confirm: "Are you sure?"] %></span>
+              <td class="flex justify-end">
+                <span>
+                  <%= live_patch "Edit", to: Routes.page_path(@socket, :edit_screening, screening), class: "text-ghost hover:text-dsb mx-2" %>
+                </span>
+                <span>
+                  <%= link "Delete", to: "#", phx_click: "delete_screening", phx_value_id: screening.id, data: [confirm: "Are you sure?"], class: "text-ghost hover:text-red-400"%>
+                </span>
               </td>
             </tr>
 <% end %>

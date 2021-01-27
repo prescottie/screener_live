@@ -66,7 +66,8 @@ defmodule ScreenerLive.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:bodyguard, "~> 2.4"},
-      {:timex, "~> 3.5"}
+      {:timex, "~> 3.5"},
+      {:hashids, "~> 2.0"}
     ]
   end
 

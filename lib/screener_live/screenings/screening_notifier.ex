@@ -30,7 +30,7 @@ defmodule ScreenerLive.Screenings.ScreeningNotifier do
   end
 
   defp public_screening_url(screening) do
-    encoded_uuid = Base.url_encode64("bcb502b1-9b43-4fcb-b39f-86521ed2d454")
-    "#{System.get_env("FRONTEND_URL")}/screenings/#{encoded_uuid}"
+    encoded_uuid = Base.url_encode64(screening.uuid, padding: false)
+    "#{System.get_env("BACKEND_URL")}/screeners/#{encoded_uuid}"
   end
 end

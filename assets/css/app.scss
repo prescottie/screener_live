@@ -1,10 +1,8 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 @import "../node_modules/nprogress/nprogress.css";
 
-main {
-  @apply mt-24;
-}
 
 .alert:empty {
   @apply hidden;
@@ -31,4 +29,6 @@ main {
   pointer-events: none;
 }
 
-@tailwind utilities;
+.prose a {
+  @apply text-ghost no-underline;
+}

@@ -1,13 +1,15 @@
-<main role="main" class="container mx-auto mb-8 px-4 max-w-6xl">
-  <p class="alert alert-success alert-left toast" role="alert"
-    phx-click="lv:clear-flash"
-    phx-hook="InitToast"
-    phx-value-key="info"><%= live_flash(@flash, :info) %></p>
-
-  <p class="alert alert-danger alert-left toast" role="alert"
-    phx-click="lv:clear-flash"
-    phx-hook="InitToast"
-    phx-value-key="error"><%= live_flash(@flash, :error) %></p>
-
+<main role="main" class="container mx-auto mb-8 px-4 max-w-6xl relative">
   <%= @inner_content %>
+    <p class="alert toast bg-charcoal-light border-l-4 border-emerald-light text-ghost" role="alert"
+    phx-click="lv:clear-flash"
+    phx-hook="InitToast"
+    phx-value-key="error"
+    id="info-toast"><%= live_flash(@flash, :info) %></p>
+
+
+  <p class="alert toast bg-charcoal-light border-l-4 border-red-400 text-ghost" role="alert"
+    phx-click="lv:clear-flash"
+    phx-hook="InitToast"
+    phx-value-key="error"
+    id="error-toast"><%= live_flash(@flash, :error) %></p>
 </main>

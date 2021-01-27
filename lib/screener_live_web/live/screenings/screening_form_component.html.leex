@@ -1,11 +1,9 @@
-<div class="card shadow">
-  <div class="card-header">
-
-
-    <h5 class="card-title">
+<div class="card shadow  bg-charcoal-dark border-0">
+  <div class="card-header border-emerald-light">
+    <h5 class="card-title text-ghost">
       <%= if @action == :new_screening, do: "Create", else: "Edit" %> screening
     </h5>
-    <%= live_patch raw("&times;"), to: @return_to, class: "phx-modal-close" %>
+    <%= live_patch raw("&times;"), to: @return_to, class: "phx-modal-close text-ghost" %>
   </div>
   <div class="card-body">
     <%= f = form_for @changeset, "#",
@@ -16,30 +14,30 @@
       phx_submit: "save" %>
 
       <div class="mb-6">
-        <%= label f, :recipient_email, class: "tag-label block text-gray-700 text-sm font-bold mb-2" %>
-        <%= text_input f, :recipient_email, class: "tag-input form-input" %>
+        <%= label f, :recipient_email, class: "tag-label block text-ghost text-sm font-bold mb-2" %>
+        <%= text_input f, :recipient_email, class: "tag-input form-input bg-charcoal-light border-0 text-ghost" %>
         <%= error_tag f, :recipient_email %>
       </div>
 
       <div class="mb-6">
-        <%= label f, :screenings_amount, class: "tag-label block text-gray-700 text-sm font-bold mb-2"%>
-        <%= number_input f, :screenings_amount, class: "tag-input form-input" %>
+        <%= label f, :screenings_amount, class: "tag-label block text-ghost text-sm font-bold mb-2"%>
+        <%= number_input f, :screenings_amount, class: "tag-input form-input bg-charcoal-light border-0 text-ghost" %>
         <%= error_tag f, :screenings_amount %>
       </div>
 
       <div class="mb-6">
-      <%= label f, :video, class: "tag-label block text-gray-700 text-sm font-bold mb-2"%>
-        <%= select f, :video_id, Enum.map(@videos, fn x -> [key: x.title,  value: x.id] end), class: "tag-input form-select" %>
+      <%= label f, :video, class: "tag-label block text-ghost text-sm font-bold mb-2"%>
+        <%= select f, :video_id, Enum.map(@videos, fn x -> [key: x.title,  value: x.id] end), class: "tag-input form-select bg-charcoal-light border-0 text-ghost" %>
       </div>
 
       <div class="mb-6">
-        <%= label f, :screenings_expiry, class: "tag-label block text-gray-700 text-sm font-bold mb-2"%>
+        <%= label f, :screenings_expiry, class: "tag-label block text-ghost text-sm font-bold mb-2"%>
         <%= date_only_datetime_select f, :screenings_expiry %>
         <%= error_tag f, :screenings_expiry %>
       </div>
 
       <div class="mt-8 mb-2">
-        <%= submit "Save", phx_disable_with: "Saving...", class: "btn btn-primary btn-sm" %>
+        <%= submit "Save", phx_disable_with: "Saving...", class: "btn btn-sm bg-emerald text-ghost hover:bg-emerald-dark" %>
       </div>
     </form>
   </div>

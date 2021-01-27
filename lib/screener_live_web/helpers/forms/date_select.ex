@@ -14,19 +14,19 @@ defmodule ScreenerLiveWeb.Helpers.Forms do
         b.(:month,
           options: 1..12,
           value: today.month,
-          class: "form-select inline-block w-auto mr-1"
+          class: "form-select inline-block w-auto mr-1 bg-charcoal-light border-0 text-ghost"
         ),
         b.(:day,
           options: 1..31,
           value: today.day,
-          class: "form-select inline-block w-auto mr-1"
+          class: "form-select inline-block w-auto mr-1 bg-charcoal-light border-0 text-ghost"
         ),
         b.(:year,
           options: year,
           value: today.year,
-          class: "form-select inline-block w-auto mr-1"
+          class: "form-select inline-block w-auto mr-1 bg-charcoal-light border-0 text-ghost"
         ),
-        ~E" <span class='text-gray-700 text-xs italic'>MM/DD/YYYY</span></div>",
+        ~E" <span class='text-ghost text-xs italic'>MM/DD/YYYY</span></div>",
         b.(:hour, value: 23, class: "hidden"),
         b.(:minute, value: 59, class: "hidden"),
         b.(:second, value: 59, class: "hidden")

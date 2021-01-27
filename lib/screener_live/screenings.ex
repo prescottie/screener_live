@@ -218,4 +218,14 @@ defmodule ScreenerLive.Screenings do
   def change_screening(%Screening{} = screening, attrs \\ %{}) do
     Screening.changeset(screening, attrs)
   end
+
+  def load_consumer_screener(uuid, email) do
+    Repo.get_by(Screening, uuid: uuid, recipient_email: email) |> Repo.preload(:video)
+  end
+
+  def consume_screening(%Screening{} = screening) do
+    screening
+    |> Screening.consumption_changeset()
+    |> Repo.update()
+  end
 end

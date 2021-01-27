@@ -11,7 +11,7 @@ const init = () => {
 
     setTimeout(() => {
       toastEl.classList.toggle("-mr-64", "mr-4")
-    }, 15000);
+    }, 3000);
   }
 }
 

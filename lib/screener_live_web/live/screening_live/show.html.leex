@@ -1,52 +1,66 @@
-<%= if @live_action in [:edit] do %>
-  <%= live_modal @socket, ScreenerLiveWeb.ScreeningLive.FormComponent,
-    id: @screening.id,
-    title: @page_title,
-    action: @live_action,
-    screening: @screening,
-    return_to: Routes.screening_show_path(@socket, :show, @screening) %>
-<% end %>
-
-<div class="flex flex-wrap">
-  <div class="w-full md:w-2/3">
-    <div class="card shadow">
-      <div class="card-header">
-        <h5 class="card-title">
-          Show Screening
-        </h5>
+<section class="my-2">
+  <%= if @screener do %>
+    <%= if @error do %>
+      <div class="flex justify-center mt-6">
+        <div class="card shadow bg-charcoal border-0 text-ghost w-1/2">
+          <div class="card-header">
+            <h5 class="card-title text-ghost">
+              Unable to load screening
+            </h5>
+          </div>
+          <%= if @error == "expired" do %>
+            <div class="card-body p-4">
+              <span class="text-emerald-light block mb-2">This screener expired on <%=Timex.format!(@screener.screenings_expiry, "{0M}/{D}/{YYYY}") %>.</span>
+              <span>If you require more time to view the screener, please contact the individual who sent the screener to you.</span>
+            </div>
+          <% end %>
+          <%= if @error == "limit_reached" do %>
+            <div class="card-body p-4">
+              <span class="text-emerald-light block mb-2">This screener has already consumed all viewings provided.</span>
+              <span>If you require more viewings, please contact the individual who sent the screener to you.</span>
+            </div>
+          <% end %>
+          <%= if @error == "not_found" do %>
+            <div class="card-body p-4">
+              <span class="text-emerald-light block mb-2">Screener not found.</span>
+              <span>Ensure you've followed the link provided in your email. Please contact <a class="text-emerald-light underline" href="mailto:support@screener.com">support@screener.com</a> if you are unable to access the screener sent to you.</span>
+            </div>
+          <% end %>
+        </div>
       </div>
-      <div class="card-body prose">
-
-        <div>
-          <strong>Recipient email:</strong>
-          <%= @screening.recipient_email %>
-        </div>
-
-        <div>
-          <strong>Screenings amount:</strong>
-          <%= @screening.screenings_amount %>
-        </div>
-
-        <div>
-          <strong>Screenings used:</strong>
-          <%= @screening.screenings_used %>
-        </div>
-
-        <div>
-          <strong>Screenings expiry:</strong>
-          <%= @screening.screenings_expiry %>
-        </div>
-
-        <div>
-          <strong>Uuid:</strong>
-          <%= @screening.uuid %>
-        </div>
-
+    <% else %>
+      <p class="text-3xl font-bold text-center text-ghost my-4"><%= @screener.video.title %></p>
+      <div
+        phx-hook="InitVideo"
+        id="video-player"
+        class="w-11/12 mx-auto"
+        data-url="<%= @screener.video.external_identifier %>"
+        data-screener-id="<%= @screener.id %>"
+      >
       </div>
-      <div class="card-footer">
-        <%= live_patch "Edit", to: Routes.screening_show_path(@socket, :edit, @screening), class: "btn btn-link btn-sm" %>
-        <%= live_redirect "Back", to: Routes.screening_index_path(@socket, :index), class: "btn btn-link btn-sm" %>
+    <% end %>
+  <% else %>
+    <%= f = form_for :screener, "#",
+    id: "screener-form",
+    class: "flex flex-col h-screen justify-center items-center",
+    phx_submit: "exchange_email" %>
+      <div class="flex flex-col block w-1/2">
+        <span class="text-5xl text-ghost ">Welcome!</span>
+        <span class="text-l text-ghost mb-6">Please verify the email your screener was sent to.</span>
       </div>
-    </div>
-  </div>
-</div>
+      <div class="flex w-1/2 mb-4">
+        <%= text_input f, :email, class: "rounded-l-lg p-4 border-t border-b border-l text-ghost border-charcoal-light bg-charcoal-light mr-0 focus:outline-none w-3/6", placeholder: "your@mail.com" %>
+        <%= submit "View Screener", phx_disable_with: "Verifying...", class: "px-6 rounded-r-lg bg-emerald text-ghost text-l font-bold p-4 uppercase border-emerald border-t border-b border-r hover:bg-emerald-dark hover:border-emerald-dark focus:outline-none w-2/6" %>
+      </div>
+      <%= if @error == "not_found" do %>
+        <div class="flex w-1/2">
+          <div class="bg-charcoal border-l-4 border-red-400 py-2 px-4 w-5/6 rounded-r">
+            <span class="text-red-400 block text-bold text-sm mb-2">Screener not found.</span>
+            <span class="text-ghost text-xs block italic">Ensure you entered your email correctly.</span>
+            <span class="text-ghost text-xs italic">If you're unable to access the screener sent to you, please contact <a class="text-emerald-light underline" href="mailto:support@screener.com">support@screener.com</a> for further support.</span>
+          </div>
+        </div>
+      <% end %>
+    </form>
+  <% end %>
+</section>
