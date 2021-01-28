@@ -2,21 +2,26 @@ defmodule ScreenerLive.Emails do
   import Bamboo.Email
   use Bamboo.Phoenix, view: ScreenerLiveWeb.EmailView
 
-  @from "test@example.com"
+  @from "no-reply@screener.com"
 
   def welcome_email(%{email: email}) do
     base_email()
     |> subject("Welcome!")
     |> to(email)
-    |> render("welcome.html", title: "Thank you for signing up", preheader: "Thank you for signing up to the app.")
+    |> render("welcome.html",
+      title: "Thank you for signing up",
+      preheader: "Thank you for signing up to the app."
+    )
     |> premail()
   end
 
   defp base_email do
     new_email()
     |> from(@from)
-    |> put_html_layout({ScreenerLiveWeb.LayoutView, "email.html"}) # Set default layout
-    |> put_text_layout({ScreenerLiveWeb.LayoutView, "email.text"}) # Set default text layout
+    # Set default layout
+    |> put_html_layout({ScreenerLiveWeb.LayoutView, "email.html"})
+    # Set default text layout
+    |> put_text_layout({ScreenerLiveWeb.LayoutView, "email.text"})
   end
 
   defp premail(email) do

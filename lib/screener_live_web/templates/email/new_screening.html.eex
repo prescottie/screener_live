@@ -46,11 +46,11 @@
         
         
       </head>
-      <body style="background-color:#ffffff;">
+      <body style="background-color:#F5F3F7;">
         
         
       <div
-         style="background-color:#ffffff;"
+         style="background-color:#F5F3F7;"
       >
         
       
@@ -137,10 +137,10 @@
       <![endif]-->
     
       
-      <div  style="background:#002317;background-color:#002317;margin:0px auto;border-radius:10px 10px 0 0;max-width:600px;">
+      <div  style="background:#1f252b;background-color:#1f252b;margin:0px auto;border-radius:10px 10px 0 0;max-width:600px;">
         
         <table
-           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#002317;background-color:#002317;width:100%;border-radius:10px 10px 0 0;"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#1f252b;background-color:#1f252b;width:100%;border-radius:10px 10px 0 0;"
         >
           <tbody>
             <tr>
@@ -171,7 +171,7 @@
               >
                 
       <div
-         style="font-family:sans-serif;font-size:24px;line-height:1;text-align:center;color:#ffffff;"
+         style="font-family:sans-serif;font-size:24px;line-height:1;text-align:center;color:#F5F3F7;"
       >New Screener</div>
     
               </td>
@@ -217,10 +217,10 @@
       <![endif]-->
     
       
-      <div  style="background:#002317;background-color:#002317;margin:0px auto;border-radius:0 0 10px 10px;max-width:600px;">
+      <div  style="background:#1f252b;background-color:#1f252b;margin:0px auto;border-radius:0 0 10px 10px;max-width:600px;">
         
         <table
-           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#002317;background-color:#002317;width:100%;border-radius:0 0 10px 10px;"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#1f252b;background-color:#1f252b;width:100%;border-radius:0 0 10px 10px;"
         >
           <tbody>
             <tr>
@@ -251,8 +251,8 @@
               >
                 
       <div
-         style="font-family:sans-serif;font-size:18px;line-height:1;text-align:left;color:#ffffff;"
-      ><%= @screening.screenings_amount%> new screenings have been provisioned to you for "<%= @video.title%>" 🍿. To view the screener, please click the button below.</div>
+         style="font-family:sans-serif;font-size:18px;line-height:1;text-align:left;color:#F5F3F7;"
+      ><%= @screening.screenings_amount%> new screeners have been provisioned to you for "<%= @video.title%>". To view the screener, please click the button below.</div>
     
               </td>
             </tr>
@@ -267,10 +267,10 @@
       >
         <tr>
           <td
-             align="center" bgcolor="#03CE73" role="presentation" style="border:none;border-radius:10px;cursor:auto;mso-padding-alt:10px 25px;background:#03CE73;" valign="middle"
+             align="center" bgcolor="#39DB8E" role="presentation" style="border:none;border-radius:10px;cursor:auto;mso-padding-alt:10px 25px;background:#39DB8E;" valign="middle"
           >
             <a
-               href="<%= @url %>" style="display:inline-block;background:#03CE73;color:#ffffff;font-family:sans-serif;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:10px;" target="_blank"
+               href="<%= @url %>" style="display:inline-block;background:#39DB8E;color:#F5F3F7;font-family:sans-serif;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:10px;" target="_blank"
             >
               VIEW SCREENER
             </a>
@@ -287,8 +287,8 @@
               >
                 
       <div
-         style="font-family:sans-serif;font-size:10px;line-height:1;text-align:left;color:#ffffff;"
-      >A viewing will be counted toward the allotted screenings amount once an email address has been verified, the video loaded and the user has begun playback of the video.</div>
+         style="font-family:sans-serif;font-size:10px;line-height:1;text-align:left;color:#F5F3F7;"
+      >A viewing will be counted toward the allotted screeners once an email address has been verified, the video has loaded and the user has begun playback of the video.</div>
     
               </td>
             </tr>

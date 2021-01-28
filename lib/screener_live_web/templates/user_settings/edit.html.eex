@@ -1,68 +1,69 @@
-<div class="flex flex-wrap">
+<div class="flex flex-wrap mt-24">
   <div class="w-full md:w-2/3">
-    <div class="card shadow">
-      <div class="card-header">
-        <h5 class="card-title">Settings!!!</h5>
+    <div class="card shadow bg-charcoal-dark border-0">
+      <div class="card-header border-emerald-light">
+        <h5 class="card-title text-ghost text-xl">User Settings</h5>
       </div>
-      <div class="card-body prose">
-        <h4>Change e-mail</h4>
+      <div class="card-body text-ghost">
+        <div class="mb-4">
+          <h4 class="mb-2 font-bold text-lg">Change Email</h4>
+          <%= form_for @email_changeset, Routes.user_settings_path(@conn, :update_email), fn f -> %>
+            <%= if @email_changeset.action do %>
+              <div class="alert alert-danger">
+                <p>Oops, something went wrong! Please check the errors below.</p>
+              </div>
+            <% end %>
 
-        <%= form_for @email_changeset, Routes.user_settings_path(@conn, :update_email), fn f -> %>
-          <%= if @email_changeset.action do %>
-            <div class="alert alert-danger">
-              <p>Oops, something went wrong! Please check the errors below.</p>
+            <div class="mb-6">
+              <%= label f, :email, class: "tag-label  block text-ghost text-sm font-bold mb-2" %>
+              <%= text_input f, :email, required: true, class: "tag-input form-input bg-charcoal-light border-0 text-ghost" %>
+              <%= error_tag f, :email %>
+            </div>
+
+            <div class="mb-6">
+              <%= label f, :current_password, for: "current_password_for_email  block text-ghost text-sm font-bold mb-2" %>
+              <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email", class: "tag-input form-input bg-charcoal-light border-0 text-ghost" %>
+              <%= error_tag f, :current_password %>
+            </div>
+
+            <div class="mb-2">
+              <%= submit "Change email", class: "btn btn-sm bg-emerald hover:bg-emerald-dark text-ghost" %>
             </div>
           <% end %>
+        </div>
+        <div class="mb-4">
+          <h4 class="mb-2 font-bold text-lg">Change password</h4>
 
-          <div class="mb-6">
-            <%= label f, :email, class: "tag-label" %>
-            <%= text_input f, :email, required: true, class: "tag-input" %>
-            <%= error_tag f, :email %>
-          </div>
+          <%= form_for @password_changeset, Routes.user_settings_path(@conn, :update_password), fn f -> %>
+            <%= if @password_changeset.action do %>
+              <div class="alert alert-danger">
+                <p>Oops, something went wrong! Please check the errors below.</p>
+              </div>
+            <% end %>
 
-          <div class="mb-6">
-            <%= label f, :current_password, for: "current_password_for_email" %>
-            <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email", class: "tag-input" %>
-            <%= error_tag f, :current_password %>
-          </div>
+            <div class="mb-6">
+              <%= label f, :password, "New password", class: "tag-label  block text-ghost text-sm font-bold mb-2" %>
+              <%= password_input f, :password, required: true, class: "tag-input form-input bg-charcoal-light border-0 text-ghost" %>
+              <%= error_tag f, :password %>
+            </div>
 
-          <div class="mt-8 mb-2">
-            <%= submit "Change e-mail", class: "btn btn-primary btn-sm" %>
-          </div>
-        <% end %>
+            <div class="mb-6">
+              <%= label f, :password_confirmation, "Confirm new password", class: "tag-label  block text-ghost text-sm font-bold mb-2" %>
+              <%= password_input f, :password_confirmation, required: true, class: "tag-input form-input bg-charcoal-light border-0 text-ghost" %>
+              <%= error_tag f, :password_confirmation %>
+            </div>
 
-        <h4>Change password</h4>
+            <div class="mb-6">
+              <%= label f, :current_password, for: "current_password_for_password", class: "tag-label  block text-ghost text-sm font-bold mb-2" %>
+              <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password", class: "tag-input form-input bg-charcoal-light border-0 text-ghost" %>
+              <%= error_tag f, :current_password %>
+            </div>
 
-        <%= form_for @password_changeset, Routes.user_settings_path(@conn, :update_password), fn f -> %>
-          <%= if @password_changeset.action do %>
-            <div class="alert alert-danger">
-              <p>Oops, something went wrong! Please check the errors below.</p>
+            <div class="mb-2">
+              <%= submit "Change password", class: "btn btn-sm bg-emerald hover:bg-emerald-dark text-ghost" %>
             </div>
           <% end %>
-
-          <div class="mb-6">
-            <%= label f, :password, "New password", class: "tag-label" %>
-            <%= password_input f, :password, required: true, class: "tag-input" %>
-            <%= error_tag f, :password %>
-          </div>
-
-          <div class="mb-6">
-            <%= label f, :password_confirmation, "Confirm new password", class: "tag-label" %>
-            <%= password_input f, :password_confirmation, required: true, class: "tag-input" %>
-            <%= error_tag f, :password_confirmation %>
-          </div>
-
-          <div class="mb-6">
-            <%= label f, :current_password, for: "current_password_for_password", class: "tag-label" %>
-            <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password", class: "tag-input" %>
-            <%= error_tag f, :current_password %>
-          </div>
-
-          <div class="mt-8 mb-2">
-            <%= submit "Change password", class: "btn btn-primary btn-sm" %>
-          </div>
-        <% end %>
-
+        </div>
       </div>
     </div>
   </div>

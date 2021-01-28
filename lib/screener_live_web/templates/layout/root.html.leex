@@ -15,7 +15,6 @@
         <a href="/" title="ScreenerLive Home Page" class="flex items-center text-xl text-ghost">
           ScreenerLive
         </a>
-        <div><%= @current_user.email %>, user_id - <%= @current_user.id %> </div>
         <div class="flex items-center space-x-1">
           <div class="hidden md:inline-flex space-x-1">
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>

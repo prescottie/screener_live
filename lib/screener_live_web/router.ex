@@ -44,19 +44,6 @@ defmodule ScreenerLiveWeb.Router do
     live "/videos/:id/edit", PageLive, :edit_video
     live "/screenings/new", PageLive, :new_screening
     live "/screenings/:id/edit", PageLive, :edit_screening
-
-    # live "/videos", VideoLive.Index, :index
-    # live "/videos/new", VideoLive.Index, :new
-    # live "/videos/:id/edit", VideoLive.Index, :edit
-
-    # live "/videos/:id", VideoLive.Show, :show
-    # live "/videos/:id/show/edit", VideoLive.Show, :edit
-
-    # live "/videos/:video_uuid/screenings", ScreeningLive.Index, :index
-    # live "/videos/:video_uuid/screenings/new", ScreeningLive.Index, :new
-    # live "/videos/:video_uuid/screenings/:id/edit", ScreeningLive.Index, :edit
-
-    # live "/videos/:video_uuid/screenings/:id/show/edit", ScreeningLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
@@ -83,7 +70,11 @@ defmodule ScreenerLiveWeb.Router do
   ## Authentication routes
 
   scope "/", ScreenerLiveWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated, :put_session_layout]
+    pipe_through [
+      :browser,
+      :redirect_if_user_is_authenticated,
+      :put_session_layout
+    ]
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create
@@ -96,7 +87,7 @@ defmodule ScreenerLiveWeb.Router do
   end
 
   scope "/", ScreenerLiveWeb do
-    pipe_through [:browser, :require_authenticated_user]
+    pipe_through [:browser, :require_authenticated_user, :user_root_layout]
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings/update_password", UserSettingsController, :update_password
