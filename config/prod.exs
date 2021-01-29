@@ -30,6 +30,13 @@ config :screener_live, ScreenerLive.Repo,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :screener, ScreenerLive.Mailer,
+  adapter: Bamboo.SendGridAdapter,
+  api_key: System.get_env("SENDGRID_API_KEY"),
+  hackney_opts: [
+    recv_timeout: :timer.minutes(1)
+  ]
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
