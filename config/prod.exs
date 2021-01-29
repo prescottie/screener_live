@@ -30,7 +30,7 @@ config :screener_live, ScreenerLive.Repo,
 # Do not print debug messages in production
 config :logger, level: :info
 
-config :screener, ScreenerLive.Mailer,
+config :screener_live, ScreenerLive.Mailer,
   adapter: Bamboo.SendGridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY"),
   hackney_opts: [
