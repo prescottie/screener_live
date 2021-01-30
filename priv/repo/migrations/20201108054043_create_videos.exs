@@ -2,8 +2,6 @@ defmodule ScreenerLive.Repo.Migrations.CreateVideos do
   use Ecto.Migration
 
   def up do
-    execute "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\""
-
     create table(:videos) do
       add :title, :string
       add :external_identifier, :string
