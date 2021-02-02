@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "ScreenerLive", suffix: " · Phoenix Framework" %>
+    <%= live_title_tag assigns[:page_title] || "Scrnr", suffix: " · Phoenix Framework" %>
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src='<%= Routes.static_path(@conn, "/js/app.js") %>'></script>
   </head>
   <body class="flex flex-col h-full bg-charcoal">
     <header>
-      <nav class="flex flex-wrap items-center justify-between py-2 px-4 fixed top-0 right-0 left-0 z-30 bg-charcoal">
-        <a class="inline-block mr-4 py-1 text-xl text-ghost" href="/"><i class="fas fa-bolt"></i> ScreenerLive</a>
+      <nav class="container flex flex-wrap items-center justify-between py-2 px-4 fixed top-0 z-30 bg-charcoal">
+        <%= link "Scrnr", to: Routes.page_path(@conn, :index), class: "text-xl text-ghost" %>
       </nav>
     </header>
 

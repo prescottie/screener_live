@@ -23,38 +23,37 @@
       <% end %>
     </div>
     <div class="card shadow bg-charcoal-light border-0">
-      <div class="card-body prose max-w-full">
-        <table class="table-auto text-ghost">
-          <thead>
+      <div class="card-body max-w-full overflow-x-auto">
+        <table class="table-auto text-ghost w-full text-left text-sm">
+          <thead class="border-emerald-light border-b">
             <tr class="text-ghost">
-              <th>Recipient email</th>
-              <th>Video</th>
-              <th>Used</th>
-              <th>Issued</th>
-              <th>Expiry</th>
-
+              <th class="pr-2 pb-2">Recipient email</th>
+              <th class="pr-2 pb-2 pl-2">Video</th>
+              <th class="pr-2 pb-2 pl-2">Used</th>
+              <th class="pr-2 pb-2 pl-2">Issued</th>
+              <th class="pr-2 pb-2 pl-2">Expiry</th>
               <th></th>
             </tr>
           </thead>
           <tbody id="screenings">
-<%= for screening <- @screenings do %>
-            <tr id="screening-<%= screening.id %>">
-              <td><%= screening.recipient_email %></td>
-              <td><%= Enum.find(@videos, fn x -> x.id == screening.video_id end).title %></td>
-              <td><%= screening.screenings_used %></td>
-              <td><%= screening.screenings_amount %></td>
-              <td><%= screening.screenings_expiry.month %>/<%= screening.screenings_expiry.day %>/<%= screening.screenings_expiry.year %></td>
+            <%= for screening <- @screenings do %>
+              <tr id="screening-<%= screening.id %>">
+                <td class="pr-2 pb-2 pt-2"><%= screening.recipient_email %></td>
+                <td class="pr-2 pb-2 pt-2 pl-2"><%= Enum.find(@videos, fn x -> x.id == screening.video_id end).title %></td>
+                <td class="pr-2 pb-2 pt-2 pl-2"><%= screening.screenings_used %></td>
+                <td class="pr-2 pb-2 pt-2 pl-2"><%= screening.screenings_amount %></td>
+                <td class="pr-2 pb-2 pt-2 pl-2"><%= screening.screenings_expiry.month %>/<%= screening.screenings_expiry.day %>/<%= screening.screenings_expiry.year %></td>
 
-              <td class="flex justify-end">
-                <span>
-                  <%= live_patch "Edit", to: Routes.page_path(@socket, :edit_screening, screening), class: "text-ghost hover:text-dsb mx-2" %>
-                </span>
-                <span>
-                  <%= link "Delete", to: "#", phx_click: "delete_screening", phx_value_id: screening.id, data: [confirm: "Are you sure?"], class: "text-ghost hover:text-red-400"%>
-                </span>
-              </td>
-            </tr>
-<% end %>
+                <td class="flex justify-end pr-2 pb-2 pt-2 pl-2">
+                  <span>
+                    <%= live_patch "Edit", to: Routes.page_path(@socket, :edit_screening, screening), class: "text-ghost hover:text-dsb mx-2" %>
+                  </span>
+                  <span>
+                    <%= link "Delete", to: "#", phx_click: "delete_screening", phx_value_id: screening.id, data: [confirm: "Are you sure?"], class: "text-ghost hover:text-red-400"%>
+                  </span>
+                </td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>

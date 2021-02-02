@@ -44,17 +44,17 @@
     id: "screener-form",
     class: "flex flex-col h-screen justify-center items-center",
     phx_submit: "exchange_email" %>
-      <div class="flex flex-col block w-1/2">
+      <div class="flex flex-col block w-full md:w-1/2">
         <span class="text-5xl text-ghost ">Welcome!</span>
         <span class="text-l text-ghost mb-6">Please verify the email your screener was sent to.</span>
       </div>
-      <div class="flex w-1/2 mb-4">
-        <%= text_input f, :email, class: "rounded-l-lg p-4 border-t border-b border-l text-ghost border-charcoal-light bg-charcoal-light mr-0 focus:outline-none w-3/6", placeholder: "your@mail.com" %>
-        <%= submit "View Screener", phx_disable_with: "Verifying...", class: "px-6 rounded-r-lg bg-emerald text-ghost text-l font-bold p-4 uppercase border-emerald border-t border-b border-r hover:bg-emerald-dark hover:border-emerald-dark focus:outline-none w-2/6" %>
+      <div class="flex w-full md:w-1/2 mb-6">
+        <%= text_input f, :email, class: "rounded-l-lg p-4 border-t border-b border-l text-ghost border-charcoal-light bg-charcoal-light mr-0 focus:outline-none w-4/6 md:w-3/6", placeholder: "your@mail.com" %>
+        <%= submit "View Screener", phx_disable_with: "Verifying...", class: "px-6 rounded-r-lg bg-emerald text-ghost text-sm font-bold p-4 uppercase border-emerald border-t border-b border-r hover:bg-emerald-dark hover:border-emerald-dark focus:outline-none w-2/6" %>
       </div>
       <%= if @error == "not_found" do %>
-        <div class="flex w-1/2">
-          <div class="bg-charcoal border-l-4 border-red-400 py-2 px-4 w-5/6 rounded-r">
+        <div class="flex w-full md:w-1/2">
+          <div class="bg-charcoal border-l-4 border-red-400 py-2 px-4 w-full md: w-5/6 rounded-r">
             <span class="text-red-400 block text-bold text-sm mb-2">Screener not found.</span>
             <span class="text-ghost text-xs block italic">Ensure you entered your email correctly.</span>
             <span class="text-ghost text-xs italic">If you're unable to access the screener sent to you, please contact <a class="text-emerald-light underline" href="mailto:support@screener.com">support@screener.com</a> for further support.</span>

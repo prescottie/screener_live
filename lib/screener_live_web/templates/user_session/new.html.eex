@@ -17,7 +17,7 @@
   </div>
 
   <%= label f, :remember_me, class: "tag-label" do %>
-    <%= checkbox f, :remember_me, class: "tag-checkbox form-checkbox text-emerald border-emerald" %>
+    <%= checkbox f, :remember_me, class: "tag-checkbox form-checkbox text-emerald border-0" %>
     <span class="ml-1">Remember me</span>
   <% end %>
 
