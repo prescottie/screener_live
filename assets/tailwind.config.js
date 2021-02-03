@@ -20,10 +20,13 @@ module.exports = {
     content: [
       "../lib/**/*.eex",
       "../lib/**/*.leex",
-      "../lib/**/*_view.ex"
+      "../lib/**/*_view.ex",
+      "../lib/**/**/*.eex",
+      "../lib/**/**/*.leex",
+      "../lib/**/**/*_view.ex"
     ],
     options: {
-      whitelist: [/phx/, /nprogress/]
+      whitelist: [/phx/, /nprogress/, /w-auto/]
     }
   },
   plugins: [require("kutty")]
