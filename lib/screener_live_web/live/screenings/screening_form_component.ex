@@ -33,7 +33,7 @@ defmodule ScreenerLiveWeb.Screenings.ScreeningFormComponent do
       {:ok, _screening} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Screening updated successfully")
+         |> put_flash(:info, "Screening updated")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -49,7 +49,7 @@ defmodule ScreenerLiveWeb.Screenings.ScreeningFormComponent do
 
         {:noreply,
          socket
-         |> put_flash(:info, "Screening created successfully")
+         |> put_flash(:info, "Screening created")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->

@@ -44,7 +44,7 @@
                 <td class="pr-2 pb-2 pt-2 pl-2"><%= screening.screenings_amount %></td>
                 <td class="pr-2 pb-2 pt-2 pl-2"><%= screening.screenings_expiry.month %>/<%= screening.screenings_expiry.day %>/<%= screening.screenings_expiry.year %></td>
 
-                <td class="flex justify-end pr-2 pb-2 pt-2 pl-2">
+                <td class="flex justify-end items-center pr-2 pb-2 pt-2 pl-2">
                   <span>
                     <%= live_patch "Edit", to: Routes.page_path(@socket, :edit_screening, screening), class: "text-ghost hover:text-dsb mx-2" %>
                   </span>

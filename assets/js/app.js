@@ -21,13 +21,12 @@ import Player from '@vimeo/player';
 let Hooks = {}
 Hooks.InitToast = {
   mounted() {
-    // const toastEl = document.querySelector('.toast')
-    if (this.el.innerText !== '') {
-      this.el.classList.add("mr-4")
+    const toastEl = document.querySelector('.toast')
+    if (toastEl.innerText !== '') {
+      toastEl.classList.add("mr-4")
 
       setTimeout(() => {
-        this.el.classList.remove("mr-4")
-        this.el.classList.toggle("-mr-64")
+        toastEl.classList.toggle("-mr-64", "mr-4")
       }, 3000);
     }
   }

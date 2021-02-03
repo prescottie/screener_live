@@ -64,7 +64,7 @@ defmodule ScreenerLiveWeb.PageLive do
     {:noreply,
      socket
      |> put_flash(:info, "Screening deleted")
-     |> assign(:screenings, list_screenings(socket.assigns.user))}
+     |> push_redirect(to: Routes.page_path(socket, :index))}
   end
 
   @impl true
@@ -75,7 +75,7 @@ defmodule ScreenerLiveWeb.PageLive do
     {:noreply,
      socket
      |> put_flash(:info, "Video deleted")
-     |> assign(:videos, list_videos(socket.assigns.user.id))}
+     |> push_redirect(to: Routes.page_path(socket, :index))}
   end
 
   defp list_videos(user) do

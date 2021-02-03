@@ -32,7 +32,7 @@ defmodule ScreenerLive.Screenings.Screening do
       :screenings_expiry,
       :video_id
     ])
-    |> unique_constraint(:video_id_recipient_email)
+    |> unique_constraint([:recipient_email,:video_id], name: :screenings_video_id_recipient_email_index)
   end
 
   def consumption_changeset(screening) do

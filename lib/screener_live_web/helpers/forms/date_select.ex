@@ -7,24 +7,24 @@ defmodule ScreenerLiveWeb.Helpers.Forms do
     builder = fn b ->
       today = Timex.now()
 
-      year = Enum.map(0..5, fn i -> today.year + i end)
+      year = Enum.map(0..8, fn i -> today.year + i end)
 
       [
         ~E"<div>",
         b.(:month,
           options: 1..12,
           value: today.month,
-          class: "form-select inline-block w-auto mr-1 bg-charcoal-light border-0 text-ghost"
+          class: "form-select bg-charcoal-light border-0 text-ghost inline-block w-auto mr-1 "
         ),
         b.(:day,
           options: 1..31,
           value: today.day,
-          class: "form-select inline-block w-auto mr-1 bg-charcoal-light border-0 text-ghost"
+          class: "form-select bg-charcoal-light border-0 text-ghost inline-block w-auto mr-1"
         ),
         b.(:year,
           options: year,
           value: today.year,
-          class: "form-select inline-block w-auto mr-1 bg-charcoal-light border-0 text-ghost"
+          class: "form-select bg-charcoal-light border-0 text-ghost inline-block w-auto mr-1"
         ),
         ~E" <span class='text-ghost text-xs italic'>MM/DD/YYYY</span></div>",
         b.(:hour, value: 23, class: "hidden"),

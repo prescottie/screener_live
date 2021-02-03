@@ -32,7 +32,7 @@ defmodule ScreenerLiveWeb.Screenings.VideoFormComponent do
       {:ok, _video} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Video updated successfully")
+         |> put_flash(:info, "Video updated")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -47,7 +47,7 @@ defmodule ScreenerLiveWeb.Screenings.VideoFormComponent do
       {:ok, _video} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Video created successfully")
+         |> put_flash(:info, "Video created")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
