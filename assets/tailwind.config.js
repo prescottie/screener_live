@@ -15,19 +15,19 @@ module.exports = {
       }
     }
   },
-  purge: {
-    enabled: process.env.MIX_ENV === "prod",
-    content: [
-      "../lib/**/*.eex",
-      "../lib/**/*.leex",
-      "../lib/**/*_view.ex",
-      "../lib/**/**/*.eex",
-      "../lib/**/**/*.leex",
-      "../lib/**/**/*_view.ex"
-    ],
-    options: {
-      whitelist: [/phx/, /nprogress/, /w-auto/]
-    }
-  },
+  // purge: {
+  //   enabled: true,
+  //   content: [
+  //     "../lib/**/*.eex",
+  //     "../lib/**/*.leex",
+  //     "../lib/**/*_view.ex",
+  //     "../lib/**/**/*.eex",
+  //     "../lib/**/**/*.leex",
+  //     "../lib/**/**/*_view.ex"
+  //   ],
+  //   options: {
+  //     whitelist: [/phx/, /nprogress/, /w-auto/]
+  //   }
+  // },
   plugins: [require("kutty")]
 }
